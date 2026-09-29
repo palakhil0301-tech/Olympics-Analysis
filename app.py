@@ -11,10 +11,6 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CSV_PATH = os.path.join(BASE_DIR, 'athlete_events.csv')
 REGION_PATH = os.path.join(BASE_DIR, 'noc_regions.csv')
 
-st.write("CSV path:", CSV_PATH)
-st.write("CSV exists:", os.path.exists(CSV_PATH))
-st.write("CSV size:", os.path.getsize(CSV_PATH) if os.path.exists(CSV_PATH) else "FILE NOT FOUND")
-
 df = pd.read_csv('athlete_events.csv')
 region_df = pd.read_csv('noc_regions.csv')
 
