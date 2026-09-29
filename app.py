@@ -11,8 +11,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CSV_PATH = os.path.join(BASE_DIR, 'athlete_events.csv')
 REGION_PATH = os.path.join(BASE_DIR, 'noc_regions.csv')
 
-df = pd.read_csv('athlete_events.csv')
-region_df = pd.read_csv('noc_regions.csv')
+df = pd.read_csv(CSV_PATH)
+region_df = pd.read_csv(REGION_PATH)
 
 df = preprocessor.preprocess(df,region_df)
 
