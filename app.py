@@ -170,14 +170,26 @@ if user_menu == 'Athlete wise Analysis':
         x.append(temp_df[temp_df['Medal'] == 'Gold']['Age'].dropna())
         name.append(sport)
 
+    plot_data = []
+
+    for ages, sport in zip(x, name):
+        temp = pd.DataFrame({
+            'Age': ages,
+            'Sport': sport
+        })
+        plot_data.append(temp)
+    
+    plot_df = pd.concat(plot_data, ignore_index=True)
+    
     fig = px.histogram(
-    x=x,
-    color=name,
-    histnorm='probability density',
-    barmode='overlay',
-    opacity=0.6,
-    nbins=20
-)
+        plot_df,
+        x='Age',
+        color='Sport',
+        histnorm='probability density',
+        barmode='overlay',
+        opacity=0.6,
+        nbins=20
+    )
     fig.update_layout(autosize=False, width=1000, height=600)
     st.title("Distribution of Age wrt Sports(Gold Medalist)")
     st.plotly_chart(fig)
