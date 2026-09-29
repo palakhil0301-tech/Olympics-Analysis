@@ -133,10 +133,24 @@ if user_menu == 'Athlete wise Analysis':
     x3 = athlete_df[athlete_df['Medal'] == 'Silver']['Age'].dropna()
     x4 = athlete_df[athlete_df['Medal'] == 'Bronze']['Age'].dropna()
 
-    fig = ff.create_distplot([x1, x2, x3, x4], ['Overall Age', 'Gold Medalist', 'Silver Medalist', 'Bronze Medalist'],show_hist=False, show_rug=False)
-    fig.update_layout(autosize=False,width=1000,height=600)
-    st.title("Distribution of Age")
-    st.plotly_chart(fig)
+    fig = px.histogram(
+    x=pd.concat([x1, x2, x3, x4]),
+    color=pd.concat([
+        pd.Series(['Overall Age'] * len(x1)),
+        pd.Series(['Gold Medalist'] * len(x2)),
+        pd.Series(['Silver Medalist'] * len(x3)),
+        pd.Series(['Bronze Medalist'] * len(x4))
+    ]),
+    marginal=None,
+    barmode='overlay',
+    opacity=0.6,
+    nbins=20
+    )
+    
+    fig.update_layout(
+        xaxis_title='Age',
+        yaxis_title='Count'
+    )
 
     x = []
     name = []
